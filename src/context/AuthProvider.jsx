@@ -1,12 +1,14 @@
-import { createContext } from "react";
+import { useState, createContext } from "react";
 
 const AuthContext = createContext();
 function AuthProvider({ children }) {
-    const hola = "hola";
+    //*Para alamacenar la respuesta de autenticar usuarioController
+    const [auth, setAuth] = useState({});
     return (
         <AuthContext.Provider
             value={{
-                hola,
+                auth,
+                setAuth,
             }}
         >
             {children}

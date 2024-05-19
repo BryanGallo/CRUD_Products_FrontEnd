@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import clientAxios from "../../config/clientAxios.js";
+import useAuth from "../../hooks/useAuth.jsx";
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const { setAuth } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,6 +21,7 @@ export default function Login() {
             });
             setEmail("");
             setPassword("");
+            setAuth(data);
             alert(data.name);
         } catch (error) {
             alert(error.response.data.msg);
