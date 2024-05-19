@@ -25,10 +25,11 @@ export default function Login() {
             });
             setEmail("");
             setPassword("");
+            localStorage.setItem("token", data.token);
             setAuth(data);
             setTimeout(() => {
                 setLoading(false);
-                navigate("/");
+                navigate("/forget-password");
             }, 500);
         } catch (error) {
             alert(error.response.data.msg);
