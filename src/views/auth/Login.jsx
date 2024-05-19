@@ -1,14 +1,24 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 export default function Login() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if ([email, password].includes("")) {
+            alert("Todos los campos son obligatorios");
+        }
+    };
+
     return (
         <>
             <h1 className="text-sky-600 font-black text-6xl max-sm:text-4xl text-center capitalize">
                 Iniciar Sesión{" "}
-                <span className="text-pink-700">
-                    {" "}
-                    Haciendola
-                </span>
+                <span className="text-pink-700"> Haciendola</span>
             </h1>
             <form
+                onSubmit={handleSubmit}
                 className="my-10 bg-white shadow rounded-lg px-10 py-8"
             >
                 <div className="my-5">
@@ -21,9 +31,12 @@ export default function Login() {
                     <input
                         id="email"
                         type="email"
-                        value=""
+                        value={email}
                         placeholder="Email"
                         className="w-full mt-3 p-3 border rounded-lg bg-gray-50"
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                        }}
                     />
                 </div>
                 <div className="my-5">
@@ -36,9 +49,12 @@ export default function Login() {
                     <input
                         id="password"
                         type="password"
-                        value=""
+                        value={password}
                         placeholder="Contraseña"
                         className="w-full mt-3 p-3 border rounded-lg bg-gray-50"
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                        }}
                     />
                 </div>
                 <input
@@ -48,12 +64,12 @@ export default function Login() {
                 />
             </form>
             <nav className="lg:flex lg:justify-center">
-                <a
-                    to="/olvide-password"
+                <Link
+                    to="/forget-password"
                     className="block text-center my-5 text-slate-500 hover:text-sky-700 uppercase text-sm"
                 >
                     Olvide mi Contraseña
-                </a>
+                </Link>
             </nav>
         </>
     );
