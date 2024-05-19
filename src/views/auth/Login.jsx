@@ -1,19 +1,23 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import clientAxios from "../../config/clientAxios.js";
 import useAuth from "../../hooks/useAuth.jsx";
+import Spinner from "../../components/Spinner.jsx";
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const { setAuth } = useAuth();
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if ([email, password].includes("")) {
-            alert("Todos los campos son obligatorios");
+            return alert("Todos los campos son obligatorios");
         }
-
+        setLoading(true);
         try {
             const { data } = await clientAxios.post("/api/auth/login", {
                 email,
@@ -22,9 +26,14 @@ export default function Login() {
             setEmail("");
             setPassword("");
             setAuth(data);
-            alert(data.name);
+            setTimeout(() => {
+                setLoading(false);
+                navigate("/");
+            }, 500);
         } catch (error) {
             alert(error.response.data.msg);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -79,6 +88,7 @@ export default function Login() {
                     value="Iniciar Sesión"
                     className="bg-sky-700 w-full py-3 text-white font-bold rounded uppercase mb-5 hover:cursor-pointer hover:bg-sky-900 transition-colors"
                 />
+                {loading && <Spinner />}
             </form>
             <nav className="lg:flex lg:justify-center">
                 <Link
