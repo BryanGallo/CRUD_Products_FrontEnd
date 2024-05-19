@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import clientAxios from "../../config/clientAxios.js";
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -8,6 +9,18 @@ export default function Login() {
         e.preventDefault();
         if ([email, password].includes("")) {
             alert("Todos los campos son obligatorios");
+        }
+
+        try {
+            const { data } = await clientAxios.post("/api/auth/login", {
+                email,
+                password,
+            });
+            setEmail("");
+            setPassword("");
+            alert(data.name);
+        } catch (error) {
+            alert(error.response.data.msg);
         }
     };
 
