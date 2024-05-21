@@ -1,6 +1,7 @@
 import { useState } from "react";
-
+import useProduct from "../../hooks/useProduct";
 export default function FormProduct() {
+    const [id, setId] = useState("");
     const [handle, setHandle] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -10,6 +11,8 @@ export default function FormProduct() {
     const [price, setPrice] = useState("");
     const [compare, setCompare] = useState("");
     const [barcode, setBarcode] = useState("");
+
+    const { submitProduct } = useProduct();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,15 +35,21 @@ export default function FormProduct() {
         // Expresión regular para validar numero y decimales
         const regexD = /^[0-9]+(?:\.[0-9]+)?$/;
         if (!regexD.test(grams)) {
-            return alert("En gramos solo deben ir numeros");
+            return alert("En Grams solo deben ir numeros");
+        }
+
+        let gramsFloat=parseFloat(grams)
+        if (gramsFloat <= 0) {
+            return alert("Grams debe ser mayor que 0");
         }
 
         const regex = /^[0-9\b]+$/;
         if (!regex.test(stock)) {
-            return setAlerta({
-                msg: "Stock solo puede contener números",
-                error: true,
-            });
+            return alert("Stock solo puede contener números");
+        }
+        let stockInt = parseInt(stock)
+        if (stockInt<=0) {
+            return alert("Stock debe ser mayor que 0");
         }
 
         if (!regexD.test(price)) {
@@ -49,10 +58,20 @@ export default function FormProduct() {
             );
         }
 
+        let priceFloat=parseFloat(price)
+        if (priceFloat <= 0) {
+            return alert("Price debe ser mayor que 0");
+        }
+
         if (!regexD.test(compare)) {
             return alert(
                 "En compare solo deben ir numeros enteros o con decimales separados por punto"
             );
+        }
+
+        let compareFloat=parseFloat(compare)
+        if (compareFloat <= 0) {
+            return alert("Price debe ser mayor que 0");
         }
 
         if (barcode.length < 8 || barcode.length > 50) {
@@ -60,6 +79,20 @@ export default function FormProduct() {
                 "El código de barras debe tener entre 8 y 50 caracteres"
             );
         }
+
+        try {
+            const result = await submitProduct({
+                id,
+                handle,
+                description,
+                sku,
+                grams,
+                stock,
+                price,
+                compare_price: compare,
+                barcode,
+            });
+        } catch (error) {}
     };
 
     return (

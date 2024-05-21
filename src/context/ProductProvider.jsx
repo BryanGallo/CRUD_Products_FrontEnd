@@ -6,7 +6,7 @@ const ProductContext = createContext();
 function ProductProvider({ children }) {
     const [products, setProducts] = useState([]);
     const [modal, setModal] = useState(false);
-    
+
     useEffect(() => {
         const getProducts = async () => {
             try {
@@ -34,8 +34,28 @@ function ProductProvider({ children }) {
         setModal(!modal);
     };
 
+    const submitProduct = async (product) => {
+        console.log(product);
+        if (product.id) {
+            await editProduct(product);
+        } else {
+            const submit = await newProduct(product);
+            return submit;
+        }
+    };
+
+    const newProduct=async(product)=>{
+        console.log('llegue');
+    }
+
+    const editProduct=async(product)=>{
+        console.log('llegue a editar');
+    }
+
     return (
-        <ProductContext.Provider value={{ products, modal, handleModalProduct }}>
+        <ProductContext.Provider
+            value={{ products, modal, handleModalProduct, submitProduct }}
+        >
             {children}
         </ProductContext.Provider>
     );
