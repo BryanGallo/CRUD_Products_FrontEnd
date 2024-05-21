@@ -1,12 +1,14 @@
 import { useState, useEffect, createContext } from "react";
 import clientAxios from "../config/clientAxios";
-
+import useAuth from "../hooks/useAuth";
 const ProductContext = createContext();
 
 function ProductProvider({ children }) {
     const [products, setProducts] = useState([]);
     const [product, setProduct] = useState({});
     const [modal, setModal] = useState(false);
+
+    const { auth } = useAuth();
 
     useEffect(() => {
         const getProducts = async () => {
@@ -29,7 +31,7 @@ function ProductProvider({ children }) {
             }
         };
         getProducts();
-    }, []);
+    }, [auth]);
 
     const handleModalProduct = () => {
         setProduct({});
