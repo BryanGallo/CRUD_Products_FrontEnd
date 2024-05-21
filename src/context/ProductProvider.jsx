@@ -44,13 +44,39 @@ function ProductProvider({ children }) {
         }
     };
 
-    const newProduct=async(product)=>{
-        console.log('llegue');
-    }
+    const newProduct = async (product) => {
+        let result = "";
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                return;
+            }
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            const { data } = await clientAxios.post(
+                "api/product/create-product",
+                product,
+                config
+            );
+            console.log(data);
+            alert(data.msg);
+            result = "ok";
+            setTimeout(() => {
+                setModal(false);
+            }, 1000);
+        } catch (error) {
+            return alert(`${error.response.data.msg}`);
+        }
+        return result;
+    };
 
-    const editProduct=async(product)=>{
-        console.log('llegue a editar');
-    }
+    const editProduct = async (product) => {
+        console.log("llegue a editar");
+    };
 
     return (
         <ProductContext.Provider

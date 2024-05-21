@@ -38,7 +38,7 @@ export default function FormProduct() {
             return alert("En Grams solo deben ir numeros");
         }
 
-        let gramsFloat=parseFloat(grams)
+        let gramsFloat = parseFloat(grams);
         if (gramsFloat <= 0) {
             return alert("Grams debe ser mayor que 0");
         }
@@ -47,8 +47,8 @@ export default function FormProduct() {
         if (!regex.test(stock)) {
             return alert("Stock solo puede contener números");
         }
-        let stockInt = parseInt(stock)
-        if (stockInt<=0) {
+        let stockInt = parseInt(stock);
+        if (stockInt <= 0) {
             return alert("Stock debe ser mayor que 0");
         }
 
@@ -58,7 +58,7 @@ export default function FormProduct() {
             );
         }
 
-        let priceFloat=parseFloat(price)
+        let priceFloat = parseFloat(price);
         if (priceFloat <= 0) {
             return alert("Price debe ser mayor que 0");
         }
@@ -69,7 +69,7 @@ export default function FormProduct() {
             );
         }
 
-        let compareFloat=parseFloat(compare)
+        let compareFloat = parseFloat(compare);
         if (compareFloat <= 0) {
             return alert("Price debe ser mayor que 0");
         }
@@ -84,6 +84,7 @@ export default function FormProduct() {
             const result = await submitProduct({
                 id,
                 handle,
+                title,
                 description,
                 sku,
                 grams,
@@ -92,7 +93,24 @@ export default function FormProduct() {
                 compare_price: compare,
                 barcode,
             });
-        } catch (error) {}
+            if (result === "ok") {
+                setId("");
+                setHandle("");
+                setTitle("");
+                setDescription("");
+                setSku("");
+                setGrams("");
+                setStock(0);
+                setPrice("");
+                setCompare("");
+                setBarcode("");
+            } else {
+                return;
+            }
+        } catch (error) {
+            console.log(error);
+            return alert("Ocurrio un error al crear el producto");
+        }
     };
 
     return (

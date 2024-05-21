@@ -55,9 +55,6 @@ export default function Products() {
                                         Description
                                     </th>
                                     <th className="py-3 px-4 font-semibold text-gray-700">
-                                        Departamento
-                                    </th>
-                                    <th className="py-3 px-4 font-semibold text-gray-700">
                                         SKU
                                     </th>
                                     <th className="py-3 px-4 font-semibold text-gray-700">
