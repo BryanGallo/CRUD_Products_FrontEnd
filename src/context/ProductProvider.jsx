@@ -85,7 +85,7 @@ function ProductProvider({ children }) {
                 config
             );
             console.log(data);
-            await updateProducts()
+            await updateProducts();
             alert(data.msg);
             result = "ok";
             setTimeout(() => {
@@ -123,7 +123,7 @@ function ProductProvider({ children }) {
                 config
             );
             console.log(data);
-            await updateProducts()
+            await updateProducts();
             alert(data.msg);
             result = "ok";
             setTimeout(() => {
@@ -133,6 +133,39 @@ function ProductProvider({ children }) {
             return alert(`${error.response.data.msg}`);
         }
         return result;
+    };
+
+    const deleteProduct = async (id) => {
+        console.log(id);
+        let result = confirm("Esta seguro que desea eliminar este producto?");
+        if (!result) {
+            return;
+        } else {
+            try {
+                const token = localStorage.getItem("token");
+                if (!token) {
+                    return;
+                }
+                const config = {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                };
+                const { data } = await clientAxios.delete(
+                    `api/product/delete-product/${id}`,
+                    config
+                );
+                console.log(data);
+                await updateProducts();
+                alert(data.msg);
+                setTimeout(() => {
+                    setModal(false);
+                }, 1000);
+            } catch (error) {
+                return alert(`${error.response.data.msg}`);
+            }
+        }
     };
 
     return (
@@ -145,6 +178,7 @@ function ProductProvider({ children }) {
                 setProduct,
                 handleModalEditProduct,
                 product,
+                deleteProduct,
             }}
         >
             {children}

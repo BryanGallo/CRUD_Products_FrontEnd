@@ -2,21 +2,22 @@ import Product from "../../components/Product/Product";
 import useProduct from "../../hooks/useProduct";
 import ModalFormProduct from "../../components/Product/ModalFormProduct";
 export default function Products() {
-    const { products, handleModalProduct } = useProduct();
+    const { products, handleModalProduct, deleteProduct } = useProduct();
     return (
         <div className="bg-gray-100">
             <div className=" md:min-h-screen">
                 <main className="md:p-10 min-lg:flex-1 ">
-                    <div className="p-4">
+                    <div className="p-4 bg-white rounded-lg">
                         <h1 className=" font-black text-4xl py-1 text-center">
                             Lista de Productos
                         </h1>
+                        <p className="text-center font-semibold">Existe {products.length} productos</p>
                     </div>
                     <ModalFormProduct />
                     <div className="p-3">
-                        <div className="flex gap-3 justify-center items-center p-1 mt-0">
+                        <div className="flex gap-3 justify-center items-center p-1 mt-0 ">
                             <button
-                                className="flex text-blue-500 hover:text-blue-700"
+                                className="flex text-blue-500 hover:text-blue-700 bg-white rounded-md p-5"
                                 onClick={handleModalProduct}
                             >
                                 <svg
@@ -41,7 +42,7 @@ export default function Products() {
                             </button>
                         </div>
                     </div>
-                    <div className="w-90 mx-auto mt-0 overflow-scroll">
+                    <div className="w-90 h-screen mx-auto mt-0 overflow-scroll">
                         <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
                             <thead className="bg-gray-200 text-lg sticky top-0 z-10 ">
                                 <tr>

@@ -13,7 +13,7 @@ export default function Product({ product }) {
         barcode,
     } = product;
 
-    const { handleModalEditProduct } = useProduct();
+    const { handleModalEditProduct, deleteProduct } = useProduct();
     return (
         <tr className="text-center">
             {/* REVISAR NULOS DE  */}
@@ -58,7 +58,9 @@ export default function Product({ product }) {
             <td className="py-3 px-4 border-b border-l border-r">
                 <button
                     className=" text-rose-500 hover:text-rose-700"
-                    onClick={() => {}}
+                    onClick={() => {
+                        deleteProduct(id);
+                    }}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

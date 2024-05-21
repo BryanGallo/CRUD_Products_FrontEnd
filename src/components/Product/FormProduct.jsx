@@ -307,7 +307,7 @@ export default function FormProduct() {
                 </div>
                 <input
                     type="submit"
-                    value="Crear Producto"
+                    value={id ? "Editar Producto" : "Crear Producto"}
                     className="bg-sky-700 w-full py-3 text-white font-bold rounded uppercase mt-5 hover:cursor-pointer hover:bg-sky-900 transition-colors"
                 />
             </form>
