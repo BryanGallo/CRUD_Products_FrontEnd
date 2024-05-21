@@ -2,7 +2,7 @@ import Product from "../../components/Product/Product";
 import useProduct from "../../hooks/useProduct";
 import ModalFormProduct from "../../components/Product/ModalFormProduct";
 export default function Products() {
-    const { products, handleModalProduct, deleteProduct } = useProduct();
+    const { products, handleModalProduct} = useProduct();
     return (
         <div className="bg-gray-100">
             <div className=" md:min-h-screen">
