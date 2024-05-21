@@ -1,9 +1,73 @@
-import React from "react";
+import { useState } from "react";
 
 export default function FormProduct() {
+    const [handle, setHandle] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [sku, setSku] = useState("");
+    const [grams, setGrams] = useState("");
+    const [stock, setStock] = useState(0);
+    const [price, setPrice] = useState("");
+    const [compare, setCompare] = useState("");
+    const [barcode, setBarcode] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (
+            [
+                handle,
+                title,
+                description,
+                sku,
+                grams,
+                stock,
+                price,
+                compare,
+                barcode,
+            ].includes("")
+        ) {
+            return alert("Todos los campos son obligatorios");
+        }
+
+        // Expresión regular para validar numero y decimales
+        const regexD = /^[0-9]+(?:\.[0-9]+)?$/;
+        if (!regexD.test(grams)) {
+            return alert("En gramos solo deben ir numeros");
+        }
+
+        const regex = /^[0-9\b]+$/;
+        if (!regex.test(stock)) {
+            return setAlerta({
+                msg: "Stock solo puede contener números",
+                error: true,
+            });
+        }
+
+        if (!regexD.test(price)) {
+            return alert(
+                "En price solo deben ir numeros enteros o con decimales separados por punto"
+            );
+        }
+
+        if (!regexD.test(compare)) {
+            return alert(
+                "En compare solo deben ir numeros enteros o con decimales separados por punto"
+            );
+        }
+
+        if (barcode.length < 8 || barcode.length > 50) {
+            return alert(
+                "El código de barras debe tener entre 8 y 50 caracteres"
+            );
+        }
+    };
+
     return (
         <div className="block w-full">
-            <form className="my-2 bg-white shadow rounded-lg px-3 py-3">
+            <form
+                onSubmit={handleSubmit}
+                className="my-2 bg-white shadow rounded-lg px-3 py-3"
+            >
                 <div className="my-1">
                     <label
                         htmlFor="handle"
@@ -16,8 +80,10 @@ export default function FormProduct() {
                         type="text"
                         placeholder="Ej. cola-glitter-23-grs"
                         className="w-full text-base mt-1 p-2 border rounded-lg bg-gray-50 "
-                        value=""
-                        onChange={(e) => {}}
+                        value={handle}
+                        onChange={(e) => {
+                            setHandle(e.target.value);
+                        }}
                     />
                 </div>
                 <div className="my-1">
@@ -32,8 +98,10 @@ export default function FormProduct() {
                         type="text"
                         placeholder="Ej. COLA GLITTER 23 GRS"
                         className="w-full mt-1 p-2 text-base border rounded-lg bg-gray-50 "
-                        value=""
-                        onChange={(e) => {}}
+                        value={title}
+                        onChange={(e) => {
+                            setTitle(e.target.value);
+                        }}
                     />
                 </div>
                 <div className="my-1">
@@ -47,8 +115,10 @@ export default function FormProduct() {
                         id="description"
                         className="p-2 border-2 w-full mt-1 placeholder-gray-400 rounded-md text-base"
                         placeholder="Características"
-                        value=""
-                        onChange={(e) => {}}
+                        value={description}
+                        onChange={(e) => {
+                            setDescription(e.target.value);
+                        }}
                     ></textarea>
                 </div>
                 <div className="my-1">
@@ -63,8 +133,10 @@ export default function FormProduct() {
                         type="text"
                         placeholder="Ej. 60870131001"
                         className="w-full mt-1 p-2 text-base border rounded-lg bg-gray-50 "
-                        value=""
-                        onChange={(e) => {}}
+                        value={sku}
+                        onChange={(e) => {
+                            setSku(e.target.value);
+                        }}
                     />
                 </div>
                 <div className="my-1">
@@ -79,8 +151,10 @@ export default function FormProduct() {
                         type="text"
                         placeholder="Ej. 100.0"
                         className="w-full mt-1 p-2 text-base border rounded-lg bg-gray-50 "
-                        value=""
-                        onChange={(e) => {}}
+                        value={grams}
+                        onChange={(e) => {
+                            setGrams(e.target.value);
+                        }}
                     />
                 </div>
                 <div className="my-1">
@@ -95,8 +169,10 @@ export default function FormProduct() {
                         type="number"
                         placeholder="Ej. 1013"
                         className="w-full mt-1 p-2 text-base border rounded-lg bg-gray-50 "
-                        value=""
-                        onChange={(e) => {}}
+                        value={stock}
+                        onChange={(e) => {
+                            setStock(e.target.value);
+                        }}
                     />
                 </div>
                 <div className="my-1">
@@ -111,8 +187,10 @@ export default function FormProduct() {
                         type="text"
                         placeholder="Ej. 1161"
                         className="w-full mt-1 p-2 text-base border rounded-lg bg-gray-50 "
-                        value=""
-                        onChange={(e) => {}}
+                        value={price}
+                        onChange={(e) => {
+                            setPrice(e.target.value);
+                        }}
                     />
                 </div>
                 <div className="my-1">
@@ -127,28 +205,33 @@ export default function FormProduct() {
                         type="text"
                         placeholder="Ej. 1290"
                         className="w-full mt-1 p-2 text-base border rounded-lg bg-gray-50 "
-                        value=""
-                        onChange={(e) => {}}
+                        value={compare}
+                        onChange={(e) => {
+                            setCompare(e.target.value);
+                        }}
                     />
                 </div>
                 <div className="my-1">
                     <label
-                        htmlFor="compare_price"
+                        htmlFor="barcode"
                         className="uppercase bg text-gray-600 block text-sm font-bold"
                     >
                         barcode
                     </label>
                     <input
-                        id="compare_price"
+                        id="barcode"
                         type="text"
                         placeholder="Ej. 7891153003689"
                         className="w-full mt-1 p-2 text-base border rounded-lg bg-gray-50 "
-                        value=""
-                        onChange={(e) => {}}
+                        value={barcode}
+                        onChange={(e) => {
+                            setBarcode(e.target.value);
+                        }}
                     />
                 </div>
                 <input
                     type="submit"
+                    value="Crear Producto"
                     className="bg-sky-700 w-full py-3 text-white font-bold rounded uppercase mt-5 hover:cursor-pointer hover:bg-sky-900 transition-colors"
                 />
             </form>
