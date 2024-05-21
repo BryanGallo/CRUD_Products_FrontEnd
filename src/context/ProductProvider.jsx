@@ -5,6 +5,8 @@ const ProductContext = createContext();
 
 function ProductProvider({ children }) {
     const [products, setProducts] = useState([]);
+    const [modal, setModal] = useState(false);
+    
     useEffect(() => {
         const getProducts = async () => {
             try {
@@ -27,8 +29,13 @@ function ProductProvider({ children }) {
         };
         getProducts();
     }, []);
+
+    const handleModalProduct = () => {
+        setModal(!modal);
+    };
+
     return (
-        <ProductContext.Provider value={{ products }}>
+        <ProductContext.Provider value={{ products, modal, handleModalProduct }}>
             {children}
         </ProductContext.Provider>
     );

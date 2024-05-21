@@ -1,5 +1,4 @@
 export default function Product({ product }) {
-    console.log(product);
     const {
         id,
         handle,
