@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import useProduct from "../hooks/useProduct";
+import useProduct from "../../hooks/useProduct";
+import FormProduct from "./FormProduct";
 
 const ModalFormProduct = () => {
     const { modal, handleModalProduct } = useProduct();
@@ -71,7 +72,7 @@ const ModalFormProduct = () => {
                                         as="h3"
                                         className="text-lg leading-6 font-bold text-gray-900"
                                     >
-                                        Aqui va formulario
+                                        <FormProduct />
                                     </Dialog.Title>
                                 </div>
                             </div>

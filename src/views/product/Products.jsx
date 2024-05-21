@@ -1,6 +1,6 @@
-import Product from "./Product";
+import Product from "../../components/Product/Product";
 import useProduct from "../../hooks/useProduct";
-import ModalFormProduct from "../../components/ModalFormProduct";
+import ModalFormProduct from "../../components/Product/ModalFormProduct";
 export default function Products() {
     const { products, handleModalProduct } = useProduct();
     return (
