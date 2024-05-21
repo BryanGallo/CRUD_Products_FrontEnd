@@ -4,6 +4,7 @@ import Product from "./Product";
 export default function Products() {
     const [products, setProducts] = useState([]);
 
+
     useEffect(() => {
         const getProducts = async () => {
             try {
@@ -84,7 +85,10 @@ export default function Products() {
                                     </tr>
                                 ) : (
                                     products.map((product) => (
-                                        <Product key={product.id} product={product} />
+                                        <Product
+                                            key={product.id}
+                                            product={product}
+                                        />
                                     ))
                                 )}
                             </tbody>
