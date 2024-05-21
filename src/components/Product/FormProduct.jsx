@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useProduct from "../../hooks/useProduct";
 export default function FormProduct() {
     const [id, setId] = useState("");
@@ -12,7 +12,32 @@ export default function FormProduct() {
     const [compare, setCompare] = useState("");
     const [barcode, setBarcode] = useState("");
 
-    const { submitProduct } = useProduct();
+    const { submitProduct, product } = useProduct();
+    useEffect(() => {
+        if (product.id) {
+            setId(product.id);
+            setHandle(product.handle);
+            setTitle(product.title);
+            setDescription(product.description);
+            setSku(product.sku);
+            setGrams(product.grams);
+            setStock(product.stock);
+            setPrice(product.price);
+            setCompare(product.compare_price);
+            setBarcode(product.barcode);
+            return;
+        }
+        setId("");
+        setHandle("");
+        setTitle("");
+        setDescription("");
+        setSku("");
+        setGrams("");
+        setStock(0);
+        setPrice("");
+        setCompare("");
+        setBarcode("");
+    }, [product]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

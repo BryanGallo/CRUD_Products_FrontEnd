@@ -69,6 +69,9 @@ export default function Products() {
                                     <th className="py-3 px-4 font-semibold text-gray-700">
                                         Compare Price
                                     </th>
+                                    <th className="py-3 px-4 font-semibold text-gray-700">
+                                        Barcode
+                                    </th>
                                     <th className="py-3 px-4 font-semibold text-blue-500">
                                         Editar
                                     </th>
