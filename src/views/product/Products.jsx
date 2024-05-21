@@ -30,13 +30,13 @@ export default function Products() {
     return (
         <div className="bg-gray-100">
             <div className=" md:min-h-screen">
-                <main className="md:p-3 min-lg:flex-1 ">
+                <main className="md:p-10 min-lg:flex-1 ">
                     <div className="p-4">
                         <h1 className=" font-black text-4xl py-1 text-center">
                             Lista de Productos
                         </h1>
                     </div>
-                    <div className="w-90 max-h-96 mx-auto mt-0 overflow-scroll p-4">
+                    <div className="w-90 mx-auto mt-0 overflow-scroll">
                         <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
                             <thead className="bg-gray-200 text-lg sticky top-0 z-10 ">
                                 <tr>
@@ -84,7 +84,7 @@ export default function Products() {
                                     </tr>
                                 ) : (
                                     products.map((product) => (
-                                        <Product key={product.id} />
+                                        <Product key={product.id} product={product} />
                                     ))
                                 )}
                             </tbody>
