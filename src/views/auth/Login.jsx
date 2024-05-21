@@ -28,7 +28,7 @@ export default function Login() {
             localStorage.setItem("token", data.token);
             setAuth(data);
             setTimeout(() => {
-                navigate("/forget-password");
+                navigate("/product");
             }, 500);
         } catch (error) {
             alert(error.response.data.msg);

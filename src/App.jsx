@@ -4,6 +4,7 @@ import AuthLayout from "./layouts/AuthLayout";
 import Login from "./views/auth/Login";
 import ForgetPassword from "./views/auth/ForgetPassword";
 import NewPassword from "./views/auth/NewPassword";
+import Product from "./views/product/Product";
 function App() {
     return (
         <BrowserRouter>
@@ -17,6 +18,7 @@ function App() {
                         />
                         <Route path="new-password" element={<NewPassword />} />
                     </Route>
+                    <Route path="/product" element={<Product />}></Route>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>
