@@ -1,28 +1,32 @@
 import { useState, useEffect, createContext } from "react";
+import clientAxios from "../config/clientAxios";
 
 const AuthContext = createContext();
 function AuthProvider({ children }) {
-    //*Para alamacenar la respuesta de autenticar usuarioController
     const [auth, setAuth] = useState({});
+    const [validate, setValidate] = useState(true);
     useEffect(() => {
         const authenticateUser = async () => {
-            const token = localStorage.getItem("token");
-            if (!token) {
-                return;
-            }
-            const config = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-            };
-
             try {
-                const { data } = await clienteAxios("/api/auth/profile", config);
+                const token = localStorage.getItem("token");
+                if (!token) {
+                    setValidate(false);
+                    return;
+                }
+                const config = {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                };
+
+                const { data } = await clientAxios("/api/auth/profile", config);
                 setAuth(data.user);
             } catch (error) {
                 setAuth({});
                 console.log(error.response.data.msg);
+            } finally {
+                setValidate(false);
             }
         };
         authenticateUser();
@@ -32,6 +36,7 @@ function AuthProvider({ children }) {
             value={{
                 auth,
                 setAuth,
+                validate,
             }}
         >
             {children}
