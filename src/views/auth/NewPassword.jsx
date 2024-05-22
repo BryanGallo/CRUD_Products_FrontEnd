@@ -58,7 +58,7 @@ export default function NewPassword() {
     };
     return (
         <>
-            <h1 className="text-sky-600 font-black text-6xl text-center capitalize">
+            <h1 className="text-sky-600 font-black text-6xl max-sm:text-4xl text-center capitalize">
                 Restablece tu Contraseña <br></br>
                 <span className="text-pink-700">Haciendola</span>
             </h1>

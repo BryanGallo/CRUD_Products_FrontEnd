@@ -31,12 +31,18 @@ function AuthProvider({ children }) {
         };
         authenticateUser();
     }, []);
+
+    const signOffAuth = () => {
+        setAuth({});
+    };
+
     return (
         <AuthContext.Provider
             value={{
                 auth,
                 setAuth,
                 validate,
+                signOffAuth
             }}
         >
             {children}

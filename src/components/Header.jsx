@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import useProduct from "../hooks/useProduct";
 
 function Header() {
     const [navbar, setNavbar] = useState(false);
 
-    const handleCerrarSesion = () => {
+    const { signOffAuth } = useAuth();
+    const { signOffProducts } = useProduct();
+
+    const handlesignOff = () => {
         if (confirm("Deseas cerrar Sesión?")) {
-            cerrarSesionAuth();
-            cerrarSesionCapacitaciones();
+            signOffAuth();
+            signOffProducts();
             localStorage.removeItem("token");
             return;
         } else {
@@ -78,7 +83,7 @@ function Header() {
                             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
                                 <button
                                     className="h-fullbg-sky-700 hover:bg-blue-300 transition-all text-white hover:text-pink-700 px-5  h-full rounded-lg"
-                                    onClick={handleCerrarSesion}
+                                    onClick={handlesignOff}
                                 >
                                     Cerrar sesión
                                 </button>

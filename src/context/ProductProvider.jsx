@@ -170,6 +170,11 @@ function ProductProvider({ children }) {
         }
     };
 
+    const signOffProducts = () => {
+        setProducts([]);
+        setProduct({});
+    };
+
     return (
         <ProductContext.Provider
             value={{
@@ -181,6 +186,7 @@ function ProductProvider({ children }) {
                 handleModalEditProduct,
                 product,
                 deleteProduct,
+                signOffProducts
             }}
         >
             {children}
