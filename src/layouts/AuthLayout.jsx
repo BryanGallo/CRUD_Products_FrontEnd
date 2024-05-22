@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-function Component() {
+function AuthLayout() {
     return (
         <>
             <main className="mx-auto container mt-5 p-5 md:flex md:justify-center ">
@@ -11,4 +11,4 @@ function Component() {
     );
 }
 
-export default Component;
+export default AuthLayout;

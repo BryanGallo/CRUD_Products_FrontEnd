@@ -1,5 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import Header from "../components/Header";
 import Spinner from "../components/Spinner";
 export default function RouteProtect() {
     const { auth, validate } = useAuth();
@@ -15,6 +16,7 @@ export default function RouteProtect() {
             {auth.id ? (
                 <div className="bg-gray-100">
                     <div className=" md:min-h-screen">
+                        <Header />
                         <main className="md:p-3 min-lg:flex-1 ">
                             <Outlet />
                         </main>
