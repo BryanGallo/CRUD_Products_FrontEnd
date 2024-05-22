@@ -42,59 +42,18 @@ export default function Products() {
                     </button>
                 </div>
             </div>
-            <div className="w-90 h-screen mx-auto mt-0 overflow-scroll">
-                <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
-                    <thead className="bg-gray-200 text-lg sticky top-0 z-10 ">
-                        <tr>
-                            <th className="py-3 px-4 font-semibold text-gray-700">
-                                Handle
-                            </th>
-                            <th className="py-3 px-4 font-semibold text-gray-700">
-                                Title
-                            </th>
-                            <th className="py-3 px-4 font-semibold text-gray-700">
-                                Description
-                            </th>
-                            <th className="py-3 px-4 font-semibold text-gray-700">
-                                SKU
-                            </th>
-                            <th className="py-3 px-4 font-semibold text-gray-700">
-                                Grams
-                            </th>
-                            <th className="py-3 px-4 font-semibold text-gray-700">
-                                Stock
-                            </th>
-                            <th className="py-3 px-4 font-semibold text-gray-700">
-                                Price
-                            </th>
-                            <th className="py-3 px-4 font-semibold text-gray-700">
-                                Compare Price
-                            </th>
-                            <th className="py-3 px-4 font-semibold text-gray-700">
-                                Barcode
-                            </th>
-                            <th className="py-3 px-4 font-semibold text-blue-500">
-                                Editar
-                            </th>
-                            <th className="py-3 px-4 font-semibold text-red-600">
-                                Eliminar
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products && products.length === 0 ? (
-                            <tr>
-                                <th className="text-center text-gray-600 uppercase font-bold">
-                                    No existen Productos
-                                </th>
-                            </tr>
-                        ) : (
-                            products.map((product) => (
-                                <Product key={product.id} product={product} />
-                            ))
-                        )}
-                    </tbody>
-                </table>
+            <div className="max-w-screen-sm h-screen mx-auto mt-0 overflow-scroll p-4">
+                {products && products.length === 0 ? (
+                    <p className="text-center">
+                        <span className="text-center text-gray-600 uppercase font-bold">
+                            No existen Productos
+                        </span>
+                    </p>
+                ) : (
+                    products.map((product) => (
+                        <Product key={product.id} product={product} />
+                    ))
+                )}
             </div>
         </>
     );
