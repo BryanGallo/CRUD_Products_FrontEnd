@@ -5,6 +5,7 @@ import Spinner from "../../components/Spinner.jsx";
 export default function ForgetPassword() {
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
+    const [link, setLink] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,6 +22,7 @@ export default function ForgetPassword() {
             );
             setEmail("");
             console.log(data);
+            setLink(data.link);
             setTimeout(() => {
                 setLoading(false);
                 alert(data.msg);
@@ -67,6 +69,16 @@ export default function ForgetPassword() {
                 />
                 {loading && <Spinner />}
             </form>
+            {link.length !== 0 ? (
+                <Link
+                    to={link}
+                    className="block font-bold text-center my-5 text-slate-500 uppercase text-lg hover:text-sky-700 bg-green-400 rounded-md"
+                >
+                    RECUPERA TU CONTRASEÑA
+                </Link>
+            ) : (
+                ""
+            )}
             <nav className="lg:flex lg:justify-center">
                 <Link
                     to="/"

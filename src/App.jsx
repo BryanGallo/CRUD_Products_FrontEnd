@@ -20,7 +20,7 @@ function App() {
                                 element={<ForgetPassword />}
                             />
                             <Route
-                                path="new-password"
+                                path="new-password/:token"
                                 element={<NewPassword />}
                             />
                         </Route>
