@@ -1,8 +1,28 @@
 import Product from "../../components/Product/Product";
 import useProduct from "../../hooks/useProduct";
 import ModalFormProduct from "../../components/Product/ModalFormProduct";
+const ITEMS_PER_PAGE = 10; // Número de elementos por página
 export default function Products() {
     const { products, handleModalProduct } = useProduct();
+    const [currentPage, setCurrentPage] = useState(1); // Estado para almacenar la página actual
+
+    let currentItems;
+    if (products.length === 1) {
+        currentItems = products.slice(0, 1);
+        console.log(currentItems);
+    } else {
+        // Cálculo de los índices de los elementos en la página actual
+        const indexOfLastItem = currentPage * ITEMS_PER_PAGE; // Índice del último elemento en la página actual
+        console.log(indexOfLastItem);
+        const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE; // Índice del primer elemento en la página actual
+        console.log(indexOfFirstItem);
+        currentItems = locales.slice(indexOfFirstItem, indexOfLastItem); // Elementos a mostrar en la página actual
+        console.log(currentItems);
+    }
+
+    // Función para cambiar de página
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <>
             <div className="p-4 bg-white rounded-lg">
