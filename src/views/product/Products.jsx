@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Product from "../../components/Product/Product";
 import useProduct from "../../hooks/useProduct";
 import ModalFormProduct from "../../components/Product/ModalFormProduct";
@@ -16,7 +17,7 @@ export default function Products() {
         console.log(indexOfLastItem);
         const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE; // Índice del primer elemento en la página actual
         console.log(indexOfFirstItem);
-        currentItems = locales.slice(indexOfFirstItem, indexOfLastItem); // Elementos a mostrar en la página actual
+        currentItems = products.slice(indexOfFirstItem, indexOfLastItem); // Elementos a mostrar en la página actual
         console.log(currentItems);
     }
 
